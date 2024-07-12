@@ -1,0 +1,11 @@
+[Unit]
+Description=USB Volume Control Initial Setup
+
+[Service]
+Type=oneshot
+ExecStart=/opt/usb-volume-control/mkdevice.sh
+WorkingDirectory=/opt/usb-volume-control
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
