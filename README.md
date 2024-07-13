@@ -6,6 +6,8 @@ It uses a daemon to control what actions should be taken over USB depending on G
 
 This is all easily configurable inside the daemon.
 
+![Raspberry Pi Zero wiring diagram](./diagram.png)
+
 ### Easy install guide for Raspberry Pi Zero (W)
 
 1. Flash Raspbian onto the SD card of the Zero with the Raspberry Pi Imager
@@ -18,7 +20,7 @@ This is all easily configurable inside the daemon.
 
 1. Prepare your system for use as a USB gadget
    - load `dwc2` and `libcomposite` kernel modules on boot
-   - add `dtoverlay=dwc2` to your Pi's boot config.txt if using a Raspberry Pi  
+   - add `dtoverlay=dwc2` to your Pi's boot config.txt if using a Raspberry Pi
 2. Install the `mkdevice.sh` script somewhere, it needs to be ran on root at startup to create the keyboard USB device.
 3. Run `daemon/daemon.mjs` using node.js to monitor GPIO pins and emit events to the emulated USB keyboard.
 
