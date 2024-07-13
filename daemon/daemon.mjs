@@ -47,8 +47,15 @@ async function theEvent() {
 	}
 }
 
+let busy = false
 watchPin(chipNumber, volumeDownPin, async (held) => {
+	console.log("volume down", held)
 	volumeDownHeld = held
+	if (busy) {
+		console.log("busy")
+		return
+	}
+	busy = true
 	if (held) {
 		queueEvent()
 	} else {
@@ -59,10 +66,17 @@ watchPin(chipNumber, volumeDownPin, async (held) => {
 			await pressVolumeDown()
 		}
 	}
+	busy = false
 })
 
 watchPin(chipNumber, volumeUpPin, async (held) => {
+	console.log("volume up", held)
 	volumeUpHeld = held
+	if (busy) {
+		console.log("busy")
+		return
+	}
+	busy = true
 	if (held) {
 		queueEvent()
 	} else {
@@ -73,4 +87,5 @@ watchPin(chipNumber, volumeUpPin, async (held) => {
 			await pressVolumeUp()
 		}
 	}
+	busy = false
 })
