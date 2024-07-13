@@ -12,13 +12,15 @@ This is all easily configurable inside the daemon.
    - IMPORTANT: make sure to add an SSH login and wifi credentials to access the device
 2. Plug the raspberry pi into your computer using the data microUSB port (the second one from the edge)
 3. SSH into your pi and clone the repo with `git clone https://github.com/benjamingwynn/usb-volume-control`
-4. Run the `./rpi-zero-install.sh` script
+4. cd into `usb-volume-control` and run the `./rpi-zero-install.sh` script
 
 ### Manual installation
 
-1. Prepare your system for use as a USB gadget using the links below
-2. Install the `mkdevice.sh` script somewhere, it needs to be ran on root at startup to create the keyboard device.
-3. Run `daemon/daemon.mjs` using node.js to monitor GPIO pins and emit events to the USB port.
+1. Prepare your system for use as a USB gadget
+   - load `dwc2` and `libcomposite` kernel modules on boot
+   - add `dtoverlay=dwc2` to your Pi's boot config.txt if using a Raspberry Pi  
+2. Install the `mkdevice.sh` script somewhere, it needs to be ran on root at startup to create the keyboard USB device.
+3. Run `daemon/daemon.mjs` using node.js to monitor GPIO pins and emit events to the emulated USB keyboard.
 
 ### References/further reading
 
@@ -30,7 +32,6 @@ USB HID/USB Gadget/Raspberry Pi:
 - https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/
 - https://www.kernel.org/doc/Documentation/usb/gadget_configfs.txt
 - https://github.com/ckuethe/usbarmory/wiki/USB-Gadgets
-- https://docs.kernel.org/next/admin-guide/gpio/sysfs.html
 
 Multimedia/CBB keys:
 
@@ -43,5 +44,7 @@ Multimedia/CBB keys:
 - https://web.archive.org/web/20180706083533/http://www2.ece.rochester.edu/~parihar/pres/Report_MultiMedia-KB.pdf
 
 GPIO:
+
+- https://docs.kernel.org/next/admin-guide/gpio/sysfs.html
 - https://www.electronicsforu.com/electronics-projects/hardware-diy/accessing-gpios-using-sysfs-interface-linux
 - https://github.com/JamesBarwell/rpi-gpio.js/blob/master/rpi-gpio.js#L284
